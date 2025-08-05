@@ -50,20 +50,20 @@ cd movie_frontend
 npm install
 npm run dev
 ```
-•	React app runs at http://localhost:5173
+- React app runs at http://localhost:5173
 
 ⸻
 
 #### Usage
-•	Register and log in to get a JWT token
-•	Add, search, and browse movies
-•	Log out to clear authentication
-•	Data is stored locally in movies.db (SQLite)
+- Register and log in to get a JWT token
+- Add, search, and browse movies
+- Log out to clear authentication
+- Data is stored locally in movies.db (SQLite)
 
 #### Credits
-•	Developed by Robert Mezian
-•	Backend: FastAPI
-•	Frontend: React, Vite, Tailwind CSS
+- Developed by Robert Mezian
+- Backend: FastAPI
+- Frontend: React, Vite, Tailwind CSS
 
 ## License
 MIT License. See [LICENSE](LICENSE) for details.
