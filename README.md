@@ -61,7 +61,7 @@ npm run dev
 •	Data is stored locally in movies.db (SQLite)
 
 #### Credits
-•	Developed by Bobby Mezian
+•	Developed by Robert Mezian
 •	Backend: FastAPI
 •	Frontend: React, Vite, Tailwind CSS
 
