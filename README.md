@@ -42,6 +42,9 @@ uvicorn app.main:app --reload
 •	FastAPI runs at http://127.0.0.1:8000
 •	Swagger docs: http://127.0.0.1:8000/docs
 
+- Backend setup can be found in the [main.py](movie_api/app/main.py) inside the [movie_api](movie_api) folder. 
+
+
 ### 3. Frontend Setup
 
 Open another terminal:
@@ -51,6 +54,7 @@ npm install
 npm run dev
 ```
 - React app runs at http://localhost:5173
+- Frontend logic and setup can be found inside [App.jsx](movie_frontend/src/App.jsx) of the [movie_frontend](movie_frontend) folder.
 
 ⸻
 
