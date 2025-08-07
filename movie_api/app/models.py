@@ -3,6 +3,8 @@ from sqlalchemy import Column, Integer, String
 from app.database import Base
 from sqlalchemy import Column, Integer, String
 from app.database import Base
+from pydantic import BaseModel
+from typing import Optional
 
 from sqlalchemy import Column, Integer, String
 from app.database import Base
@@ -22,6 +24,16 @@ class MovieCreate(BaseModel):
     genre: str
     year: int
     description: str = None
+
+class MovieOut(BaseModel):
+    id: int
+    title: str
+    genre: str
+    year: int
+    description: Optional[str] = None
+
+    class Config:
+        orm_mode = True
 
 class MovieUpdate(BaseModel):
     title: str = None

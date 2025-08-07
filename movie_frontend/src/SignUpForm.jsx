@@ -1,23 +1,29 @@
 import { useState } from "react";
 import axios from "axios";
 
-export default function LoginForm({ onLogin, onToggle }) {
+export default function SignUpForm({ onSignUp, onToggle }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = async e => {
     e.preventDefault();
     setError("");
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
     try {
-      const res = await axios.post(
-        "http://127.0.0.1:8000/auth/login",
-        new URLSearchParams({ username, password }),
-        { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
+      await axios.post(
+        "http://127.0.0.1:8000/auth/signup",
+        { username, password }
       );
-      onLogin(res.data.access_token);
+      onSignUp();
     } catch {
-      setError("Login failed. Check your username/password.");
+      setError("Sign-up failed. Username may already exist.");
     }
   };
 
@@ -37,23 +43,30 @@ export default function LoginForm({ onLogin, onToggle }) {
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
+        <input
+          className="border border-gray-300 rounded p-2 mb-4 w-full"
+          placeholder="Re-enter Password"
+          type="password"
+          value={confirmPassword}
+          onChange={e => setConfirmPassword(e.target.value)}
+        />
         <button
           type="submit"
-          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded w-full transition"
+          className="bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-2 rounded w-full transition"
         >
-          Log In
+          Sign Up
         </button>
         {error && <div className="mt-4 text-red-600 text-center">{error}</div>}
       </form>
       <div className="mt-2 text-center text-sm">
-        Don’t have an account?{" "}
+        Already have an account?{' '}
         <button
           className="underline text-blue-700"
           onClick={onToggle}
         >
-          Sign Up
+          Log In
         </button>
       </div>
     </div>
-);
+  );
 }
