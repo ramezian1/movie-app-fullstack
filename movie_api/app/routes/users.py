@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from app.database import SessionLocal
+from app.database import get_db  # centralized — no local copy needed
 from app.models import UserCreate, UserOut
 from app import crud, auth
 from fastapi.security import OAuth2PasswordRequestForm
@@ -10,12 +10,6 @@ router = APIRouter(
     tags=["auth"]
 )
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 @router.post("/signup", response_model=UserOut)
 def signup(user: UserCreate, db: Session = Depends(get_db)):
@@ -24,6 +18,7 @@ def signup(user: UserCreate, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail="Username already registered")
     hashed_pw = auth.hash_password(user.password)
     return crud.create_user(db, user.username, hashed_pw)
+
 
 @router.post("/login")
 def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
